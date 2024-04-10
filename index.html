@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <center>
+        <div>
+            <!-- Search: <input type="text" id="txtBook" /> -->
+            <button onclick="List()">List Movies</button>
+            <hr />
+            <br /> <br /><br /> <br /><br /> <br />
+            <table>
+                <!-- <thead>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Caption</th>
+                    <th>Type</th>
+                    <th>Release Year</th>
+
+                </thead> -->
+                <tbody id="refTable"></tbody>
+
+            </table>
+        </div>
+        <div id="TestDiv"></div>
+
+    </center>
+    <script>
+
+        function List() {
+            // const data = null;
+
+            // var xhr = new XMLHttpRequest();
+            // xhr.withCredentials = true;
+            // var divTest = document.getElementById("TestDiv");
+            // var movieDetailsToSearch = divTest.value;
+
+            // xhr.addEventListener('readystatechange', function () {
+            // 	if (this.readyState === this.DONE) {
+            // 		console.log(this.responseText);
+            // 	}
+            // });
+
+            // xhr.onreadystatechange = function () {
+            //     if (xhr.readyState == 4 && xhr.status == 200) {
+            //         // debugger;
+            //         var recievedData = JSON.parse(xhr.responseText);
+            //         var refTable = document.getElementById("refTable");
+            //         refTable.innerHTML = "";
+
+
+
+            //         //  console.log(recievedData.data.length);
+            //         // console.log(recievedData.results[1].titleText.text);
+            //         // console.log(recievedData.results.length);
+            //         for (let index = 0; index < recievedData.data.length; index++) {
+            //             // console.log(recievedData);
+            //             // console.log(recievedData.data.length);
+            //             var movRow = `
+            //         <tr>
+            //             <td> 
+            //                 ${recievedData.data[index].title}
+            //             </td>
+
+            //         </tr>
+            //         `;
+            // refTable.innerHTML = refTable.innerHTML + movRow;
+
+            // }
+            // if(recievedData.results.length){} //)
+
+            // }
+            //}
+
+
+            //   xhr.withCredentials = true;
+
+
+            fetch('https://api.jikan.moe/v4/top/anime')
+                .then(response => response.json())
+                .then(commits => {
+                    debugger;
+                    console.log(commits);
+
+                    var refTable = document.getElementById("refTable");
+                    refTable.innerHTML = "";
+                    for (let index = 0; index < commits.data.length; index++) {
+                        debugger;
+                        console.log(commits.data[index].title)
+                        // console.log(commits.data[index].title)
+                        // console.log(commits.data[index].entry[0].images.jpg.image_url)
+                        // console.log(commits.data[0].images.jpg.image_url);
+                        // console.log(commits.data[index].images.jpg.large_image_url);
+
+                        var movRow = `
+                    <tr>
+                     <td> 
+                           ${commits.data[index].title}
+                      </td>
+
+                   </tr>
+            <tr>
+                       <td> 
+                            ${commits.data[index].synopsis}
+
+                       </td>
+
+                     </tr>
+                     <tr>
+                       <td> 
+                            
+                            <img src="${commits.data[index].images.jpg.large_image_url}" width="100px" height="100px" />
+                                
+                       </td>
+
+                     </tr>
+            <tr>
+                        <td> 
+                            ${commits.data[index].episodes}
+                         </td>
+
+                    </tr>
+            <tr>
+                        <td> 
+                             ${commits.data[index].duration}
+                     </td>
+
+                    </tr>
+                     <tr>
+                       <td> 
+                        
+                        <iframe width="560" height="315" src="${commits.data[index].trailer.url}" frameborder="0" allowfullscreen></iframe>
+
+                     </td>
+
+                    </tr>
+                     <tr>
+                       <td> 
+                         ${commits.data[index].year}
+                    </td>
+
+                  </tr>
+                  `;
+                        refTable.innerHTML = refTable.innerHTML + movRow;
+                        debugger;
+                    }
+                    console.log(commits)
+                    debugger;
+
+
+                });
+
+
+
+
+            //   xhr.open('GET', 'https://api.jikan.moe/v4/top/anime');
+            // xhr.open('GET', 'https://api.jikan.moe/v4/top/anime');
+            // xhr.setRequestHeader('Access-Control-Allow-Origin', 'http://localhost:5500');://
+            // xhr.setRequestHeader('X-RapidAPI-Host', 'gogoanime2.p.rapidapi.com');
+
+            //   xhr.send(data);
+        }
+    </script>
+</body>
+
+</html>
